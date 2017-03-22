@@ -96,28 +96,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.search, menu);
-        MenuItem item = menu.findItem(R.id.menu_search);
-        SearchView searchView = (SearchView) item.getActionView();
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-
-        return super.onCreateOptionsMenu(menu);
-    } */
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
