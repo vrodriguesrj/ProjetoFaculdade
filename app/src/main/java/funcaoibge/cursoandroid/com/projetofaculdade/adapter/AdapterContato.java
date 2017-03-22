@@ -33,7 +33,7 @@ import static android.R.attr.filter;
  * Created by marcos.j.estagiario on 02/03/2017.
  */
 
-public class AdapterContato extends RecyclerView.Adapter<AdapterContato.ContatoViewHolder> implements Filterable {
+public class AdapterContato extends RecyclerView.Adapter<AdapterContato.ContatoViewHolder> {
 
     private Context mContext;
     private List<Contato> contatos;
@@ -68,25 +68,6 @@ public class AdapterContato extends RecyclerView.Adapter<AdapterContato.ContatoV
     public int getItemCount() {
         return contatos.size();
     }
-
-    @Override
-    public Filter getFilter() {
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                final FilterResults oReturn = new FilterResults();
-                oReturn.values = mRelatorio.getListaDeResultados(constraint.toString().toLowerCase());
-                return oReturn;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                mValoresParaExibicao = ((List<String>) results.values);
-                notifyDataSetChanged();
-            }
-        };
-    }
-
 
     public class ContatoViewHolder extends RecyclerView.ViewHolder {
 

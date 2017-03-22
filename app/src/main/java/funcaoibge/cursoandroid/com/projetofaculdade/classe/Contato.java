@@ -47,10 +47,4 @@ public class Contato implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
-
-    public List<String> getListaDeResultados(String campoDigitado){
-        if(campoDigitado == null || campoDigitado.equals("")){
-
-        }
-    }
 }
