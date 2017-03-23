@@ -1,7 +1,6 @@
 package funcaoibge.cursoandroid.com.projetofaculdade.adapter;
 
 import android.content.Context;
-import android.support.annotation.MainThread;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -9,25 +8,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import funcaoibge.cursoandroid.com.projetofaculdade.R;
 import funcaoibge.cursoandroid.com.projetofaculdade.classe.Contato;
-import funcaoibge.cursoandroid.com.projetofaculdade.eventos.RecebeContatoAdapter;
 import funcaoibge.cursoandroid.com.projetofaculdade.dao.ContatoDAO;
-
-import static android.R.attr.filter;
+import funcaoibge.cursoandroid.com.projetofaculdade.eventos.RecebeContatoAdapter;
 
 /**
  * Created by marcos.j.estagiario on 02/03/2017.
@@ -54,12 +44,15 @@ public class AdapterContato extends RecyclerView.Adapter<AdapterContato.ContatoV
         Contato contato = contatos.get(position);
 
         holder.nome.setText(contato.getNome());
+
         if (contato.getEmail().equals("") || contato.getEmail() == null) {
-            holder.email.setText("-");
+            holder.email.setText("");
         } else {
             holder.email.setText(contato.getEmail());
         }
+
         holder.telefone.setText(contato.getTelefone());
+
         String primeiraLetra = String.valueOf(contato.getNome().charAt(0));
         holder.circuloContato.setText(primeiraLetra);
     }
