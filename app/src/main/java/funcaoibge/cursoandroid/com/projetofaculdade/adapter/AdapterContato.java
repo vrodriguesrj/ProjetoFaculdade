@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -44,17 +44,18 @@ public class AdapterContato extends RecyclerView.Adapter<AdapterContato.ContatoV
         Contato contato = contatos.get(position);
 
         holder.nome.setText(contato.getNome());
+        holder.sobrenome.setText(contato.getSobrenome());
 
         if (contato.getEmail().equals("") || contato.getEmail() == null) {
             holder.email.setText("");
         } else {
             holder.email.setText(contato.getEmail());
         }
-
         holder.telefone.setText(contato.getTelefone());
 
         String primeiraLetra = String.valueOf(contato.getNome().charAt(0));
-        holder.circuloContato.setText(primeiraLetra);
+        holder.letraCirculo.setText(primeiraLetra);
+        holder.circuloContato.setBackgroundColor(contato.getCor());
     }
 
     @Override
@@ -65,19 +66,23 @@ public class AdapterContato extends RecyclerView.Adapter<AdapterContato.ContatoV
     public class ContatoViewHolder extends RecyclerView.ViewHolder {
 
         private TextView nome;
+        private TextView sobrenome;
         private TextView email;
         private TextView telefone;
-        private Button circuloContato;
+        private TextView letraCirculo;
+        private ImageView circuloContato;
 
         public ContatoViewHolder(View itemView) {
             super(itemView);
 
             nome = (TextView) itemView.findViewById(R.id.nome);
+            sobrenome = (TextView) itemView.findViewById(R.id.sobrenome);
             email = (TextView) itemView.findViewById(R.id.email);
             telefone = (TextView) itemView.findViewById(R.id.telefone);
-            circuloContato = (Button) itemView.findViewById(R.id.img_contato);
+            letraCirculo = (TextView) itemView.findViewById(R.id.texto_circulo);
+            circuloContato = (ImageView) itemView.findViewById(R.id.img_contato);
 
-            itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
+             itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
                 @Override
                 public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
                     menu.setHeaderTitle("Selecione a opção");

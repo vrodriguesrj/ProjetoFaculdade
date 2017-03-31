@@ -1,11 +1,13 @@
 package funcaoibge.cursoandroid.com.projetofaculdade;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -19,8 +21,8 @@ import java.util.List;
 
 import funcaoibge.cursoandroid.com.projetofaculdade.adapter.AdapterContato;
 import funcaoibge.cursoandroid.com.projetofaculdade.classe.Contato;
-import funcaoibge.cursoandroid.com.projetofaculdade.eventos.RecebeContatoAdapter;
 import funcaoibge.cursoandroid.com.projetofaculdade.dao.ContatoDAO;
+import funcaoibge.cursoandroid.com.projetofaculdade.eventos.RecebeContatoAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void configurarAdapter() {
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        mLayoutManager = new GridLayoutManager(this, 1);
+        mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         ContatoDAO dao = new ContatoDAO(this);
@@ -60,11 +62,59 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(adapter);
     }
 
+    private void adapterOrdemSobrenome() {
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        ContatoDAO dao = new ContatoDAO(this);
+        mListaContatos = dao.buscaAlunos();
+        dao.close();
+
+        listaEmOrdemSobrenome();
+
+        adapter = new AdapterContato(this, mListaContatos);
+        mRecyclerView.setAdapter(adapter);
+    }
+
+    private void adapterOrdemNumerica() {
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        ContatoDAO dao = new ContatoDAO(this);
+        mListaContatos = dao.buscaAlunos();
+        dao.close();
+
+        listaEmOrdemNumerica();
+
+        adapter = new AdapterContato(this, mListaContatos);
+        mRecyclerView.setAdapter(adapter);
+    }
+
     public void listaEmOrdemAlfabetica() {
         Collections.sort(mListaContatos, new Comparator<Contato>() {
             @Override
             public int compare(Contato o1, Contato o2) {
                 return o1.getNome().compareTo(o2.getNome());
+            }
+        });
+    }
+
+    public void listaEmOrdemSobrenome() {
+        Collections.sort(mListaContatos, new Comparator<Contato>() {
+            @Override
+            public int compare(Contato o1, Contato o2) {
+                return o1.getSobrenome().compareTo(o2.getSobrenome());
+            }
+        });
+    }
+
+    public void listaEmOrdemNumerica() {
+        Collections.sort(mListaContatos, new Comparator<Contato>() {
+            @Override
+            public int compare(Contato o1, Contato o2) {
+                return o1.getTelefone().compareTo(o2.getTelefone());
             }
         });
     }
@@ -91,12 +141,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_ordenado, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
-        switch (item.getItemId()) {
+        int id = item.getItemId();
 
-            default:
-                return super.onOptionsItemSelected(item);
+        if (id == R.id.ordem_sobrenome) {
+            adapterOrdemSobrenome();
         }
+        if (id == R.id.ordem_numerica) {
+            adapterOrdemNumerica();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
