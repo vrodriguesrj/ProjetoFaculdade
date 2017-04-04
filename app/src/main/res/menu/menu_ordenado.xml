@@ -10,7 +10,7 @@
         android:title="Sobrenome" />
 
     <item
-        android:id="@+id/ordem_numerica"
+        android:id="@+id/ordem_alfabetica"
         android:actionViewClass="android.widget.SearchView"
-        android:title="Número" />
+        android:title="Nome" />
 </menu>

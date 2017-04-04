@@ -56,43 +56,14 @@ public class MainActivity extends AppCompatActivity {
         mListaContatos = dao.buscaAlunos();
         dao.close();
 
-        listaEmOrdemAlfabetica();
+        contatoEmOrdemAlfabetica();
 
         adapter = new AdapterContato(this, mListaContatos);
         mRecyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
-    private void adapterOrdemSobrenome() {
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        ContatoDAO dao = new ContatoDAO(this);
-        mListaContatos = dao.buscaAlunos();
-        dao.close();
-
-        listaEmOrdemSobrenome();
-
-        adapter = new AdapterContato(this, mListaContatos);
-        mRecyclerView.setAdapter(adapter);
-    }
-
-    private void adapterOrdemNumerica() {
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        ContatoDAO dao = new ContatoDAO(this);
-        mListaContatos = dao.buscaAlunos();
-        dao.close();
-
-        listaEmOrdemNumerica();
-
-        adapter = new AdapterContato(this, mListaContatos);
-        mRecyclerView.setAdapter(adapter);
-    }
-
-    public void listaEmOrdemAlfabetica() {
+    public void contatoEmOrdemAlfabetica() {
         Collections.sort(mListaContatos, new Comparator<Contato>() {
             @Override
             public int compare(Contato o1, Contato o2) {
@@ -101,22 +72,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void listaEmOrdemSobrenome() {
+    public void contatoEmOrdemSobrenome() {
         Collections.sort(mListaContatos, new Comparator<Contato>() {
             @Override
             public int compare(Contato o1, Contato o2) {
                 return o1.getSobrenome().compareTo(o2.getSobrenome());
             }
         });
-    }
-
-    public void listaEmOrdemNumerica() {
-        Collections.sort(mListaContatos, new Comparator<Contato>() {
-            @Override
-            public int compare(Contato o1, Contato o2) {
-                return o1.getTelefone().compareTo(o2.getTelefone());
-            }
-        });
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -153,10 +116,9 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.ordem_sobrenome) {
-            adapterOrdemSobrenome();
-        }
-        if (id == R.id.ordem_numerica) {
-            adapterOrdemNumerica();
+            contatoEmOrdemSobrenome();
+        } else if (id == R.id.ordem_alfabetica) {
+            configurarAdapter();
         }
         return super.onOptionsItemSelected(item);
     }
