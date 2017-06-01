@@ -8,23 +8,11 @@
     android:orientation="vertical"
     tools:context="funcaoibge.cursoandroid.com.projetofaculdade.MainActivity">
 
-
-        <EditText
-            android:id="@+id/my_editText"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@color/cinza_claro"
-            android:textColor="@color/preto"
-            android:hint="Inserir nome"
-            android:textSize="15dp"
-            android:paddingLeft="20dp"/>
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/my_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="20dp"
-            android:layout_marginTop="40dp"
             android:scrollbars="vertical" />
 
     <android.support.design.widget.FloatingActionButton

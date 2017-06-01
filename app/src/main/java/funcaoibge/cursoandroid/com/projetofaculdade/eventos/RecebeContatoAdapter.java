@@ -17,8 +17,4 @@ public class RecebeContatoAdapter {
     public Contato getContato() {
         return contato;
     }
-
-    public void setContato(Contato contato) {
-        this.contato = contato;
-    }
 }

@@ -75,8 +75,8 @@ public class FormularioActivity extends AppCompatActivity {
                 dao.close();
                 finish();
             } else {
-                erroNome.setError("Campo nome obrigatório.");
-                erroTelefone.setError("Campo telefone obrigatório.");
+                erroNome.setError("Campo nome obrigatório...");
+                erroTelefone.setError("Campo telefone obrigatório...");
             }
         }
         return super.onOptionsItemSelected(item);

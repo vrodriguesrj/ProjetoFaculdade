@@ -17,6 +17,7 @@
         </activity>
         <activity android:name=".FormularioActivity"
             android:parentActivityName=".MainActivity"
+            android:label="Formulário"
             android:theme="@style/Agro_AppTheme.NoActionBar">
         </activity>
     </application>

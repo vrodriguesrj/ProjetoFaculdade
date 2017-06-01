@@ -20,6 +20,7 @@ public class FormularioHelper {
     private final EditText campoSobrenome;
     private final EditText campoEmail;
     private final EditText campoTelefone;
+
     private Contato contato;
     private Random random = new Random();
     private Context context;
