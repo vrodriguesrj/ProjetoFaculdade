@@ -2,19 +2,14 @@ package funcaoibge.cursoandroid.com.projetofaculdade.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
-import android.support.annotation.StringDef;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import funcaoibge.cursoandroid.com.projetofaculdade.R;
 import funcaoibge.cursoandroid.com.projetofaculdade.classe.Contato;
 
 /**
@@ -67,7 +62,7 @@ public class ContatoDAO extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
 
-        List<Contato> contatos = new ArrayList<Contato>();
+        List<Contato> contatos = new ArrayList<>();
         while (cursor.moveToNext()) {
             Contato contato = new Contato();
             contato.setId(cursor.getLong(cursor.getColumnIndex("id")));
